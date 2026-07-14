@@ -1,12 +1,14 @@
 # 🎓 Smart Educational Quiz Generator (AI Quiz Bot)
 
-An interactive Streamlit application that turns plain-text lecture notes into an AI-generated multiple-choice question. It uses the Groq API and an open-source large language model (LLM) to return structured quiz data.
+An interactive Streamlit application that turns plain-text lecture notes into a self-marking AI-generated multiple-choice quiz. It uses the Groq API and an open-source large language model (LLM) to return structured quiz data.
 
 ## ✨ Features
 
 - Upload a `.txt` lecture or study-notes file from the browser.
-- Generate a multiple-choice question from the uploaded content.
-- Receive a predictable JSON response containing the question, four answer options, and the correct answer.
+- Generate one to ten questions from excerpts distributed across the uploaded lecture.
+- Receive predictable JSON containing a question, four answer options, and the correct answer.
+- Select answers in the browser, submit the quiz, and see a score with per-question feedback.
+- Retry transient question-generation failures with exponential backoff.
 - See clear in-app feedback for missing API keys and request failures.
 - Keep API keys out of the repository through `.gitignore`.
 
@@ -72,7 +74,7 @@ export GROQ_API_KEY="your_groq_api_key"
 streamlit run app.py
 ```
 
-Open the local URL shown by Streamlit, upload a `.txt` file, and select **Generate Question Test**.
+Open the local URL shown by Streamlit, upload a `.txt` file, choose the number of questions, and select **Generate quiz**. Answer every question and select **Submit answers** to see your result.
 
 ## 📦 Expected quiz format
 
@@ -101,8 +103,7 @@ The model is asked to return a JSON object in this shape:
 
 ## Roadmap
 
-- Generate several questions from different sections of a lecture
-- Add answer selection and live quiz grading
+- Add explanations for correct answers
 - Save quiz results between sessions
 - Support additional document formats
 
